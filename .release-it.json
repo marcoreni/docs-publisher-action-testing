@@ -1,0 +1,11 @@
+{
+  "git": {
+    "commitMessage": "v${version}",
+    "requireBranch": "main",
+    "requireCommits": true
+  },
+  "github": {
+    "release": false
+  },
+  "npm": false
+}

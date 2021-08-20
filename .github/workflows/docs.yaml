@@ -1,0 +1,19 @@
+name: Publish documentation
+on:
+  push:
+    tags: 
+    - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - run: npm install
+    - uses: marcoreni/docs-publisher-action@v0.0.1
+      with:
+        deployment-branch: 'gh-pages'
+        docs-command: 'npm run docs'
