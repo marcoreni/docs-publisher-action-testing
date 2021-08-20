@@ -17,3 +17,4 @@ jobs:
       with:
         deployment-branch: 'gh-pages'
         docs-command: 'npm run docs'
+        docs-path: 'docs'
