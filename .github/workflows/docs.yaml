@@ -13,7 +13,7 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-    - uses: marcoreni/docs-publisher-action@v0.0.12
+    - uses: marcoreni/docs-publisher-action@v0.0.13
       with:
         deployment-branch: 'gh-pages'
         docs-command: 'npm run docs'
