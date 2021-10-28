@@ -27,11 +27,13 @@ jobs:
     needs: prepare-env
     runs-on: ubuntu-latest
     environment: ${{ needs.prepare-env.outputs.build_environment }}
+    env:
+      BUILD_ENVIRONMENT: ${{ needs.prepare-env.outputs.build_environment }}
     steps:
-    - run: echo "env is ${CUR_ENV}"
+    - run: echo "env is ${CUR_ENV} - ${BUILD_ENVIRONMENT}"
       env:
         CUR_ENV: ${{ needs.prepare-env.outputs.build_environment }}
-    - run: bash ./test.sh
+    - run: bash $GITHUB_WORKSPACE/test.sh
       env:
         KEY: ${{ secrets.KEY }}
 
