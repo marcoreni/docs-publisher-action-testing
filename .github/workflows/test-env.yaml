@@ -34,7 +34,7 @@ jobs:
     - run: echo "env is ${CUR_ENV} - ${BUILD_ENVIRONMENT}"
       env:
         CUR_ENV: ${{ needs.prepare-env.outputs.build_environment }}
-    - run: if [ "testenv1" == "${KEY}" ]; then; echo "first env"; elif [ "testenv2" == "${KEY}" ]; then;  echo "second env"; else; echo "boh"; fi
+    - run: if [ "testenv1" == "${KEY}" ] ; then echo "first env"; elif [ "testenv2" == "${KEY}" ] ; then echo "second env"; else echo "boh"; fi
       shell: 'bash'
       env:
         KEY: ${{ secrets.KEY }}
