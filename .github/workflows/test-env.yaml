@@ -18,7 +18,7 @@ jobs:
       DEFAULT_BUILD_ENVIRONMENT: 'testenv1'
     steps:
       - id: setenv
-        run: echo '::set-output name=environment::${{ github.event.inputs.git_reference || env.DEFAULT_BUILD_ENVIRONMENT }}' 
+        run: echo '::set-output name=environment::${{ github.event.inputs.build_environment || env.DEFAULT_BUILD_ENVIRONMENT }}' 
     outputs:
       # If you need to reference the environment, you can use needs.prepare-env.outputs.build_environment
       build_environment: ${{ steps.setenv.outputs.environment }}
@@ -33,7 +33,7 @@ jobs:
     - run: echo "env is ${CUR_ENV} - ${BUILD_ENVIRONMENT}"
       env:
         CUR_ENV: ${{ needs.prepare-env.outputs.build_environment }}
-    - run: bash $GITHUB_WORKSPACE/test.sh
+    - run: if [[ "testenv1" == "${KEY}" ]]; then; echo "first env"; elif [[ "testenv2" == "${KEY}" ]]; then;  echo "second env"; else; echo "boh"; fi
       env:
         KEY: ${{ secrets.KEY }}
 
