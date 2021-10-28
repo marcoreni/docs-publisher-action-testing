@@ -6,9 +6,9 @@ on:
       build_environment:
         description: 'Environment to be used. Choose between "testenv1", "testenv2"'
         required: true
-  schedule:
+  # schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron:  '0/10 * * * *'
+  #  - cron:  '0/10 * * * *'
 
 jobs:
   prepare-env:
