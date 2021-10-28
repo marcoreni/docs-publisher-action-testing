@@ -1,0 +1,42 @@
+name: Test prepareenv
+
+on:
+  workflow_dispatch:
+    inputs:
+      build_environment:
+        description: 'Environment to be used. Choose between "testenv1", "testenv2"'
+        required: true
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0/10 * * * *'
+
+jobs:
+  prepare-env:
+    runs-on: ubuntu-latest
+    env:
+      # Set here the default environment. It will be used for scheduled jobs
+      DEFAULT_BUILD_ENVIRONMENT: 'testenv1'
+    steps:
+      - id: setenv
+        run: echo '::set-output name=environment::${{ github.event.inputs.git_reference || env.DEFAULT_BUILD_ENVIRONMENT }}' 
+    outputs:
+      # If you need to reference the environment, you can use needs.prepare-env.outputs.build_environment
+      build_environment: ${{ steps.setenv.outputs.environment }}
+
+  build:
+    needs: prepare-env
+    runs-on: ubuntu-latest
+    environment: ${{ needs.prepare-env.outputs.build_environment }}
+    steps:
+    - run: echo "env is ${CUR_ENV}"
+      env:
+        CUR_ENV: ${{ needs.prepare-env.outputs.build_environment }}
+    - run: bash ./test.sh
+      env:
+        KEY: ${{ secrets.KEY }}
+
+    - run: echo "first environment by endsWith"
+      if: ${{ endsWith(needs.prepare-env.outputs.build_environment, '1') }}
+
+    - run: echo "second environment by endsWith"
+      if: ${{ endsWith(needs.prepare-env.outputs.build_environment, '2') }}
