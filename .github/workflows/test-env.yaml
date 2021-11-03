@@ -31,16 +31,8 @@ jobs:
     env:
       BUILD_ENVIRONMENT: ${{ needs.prepare-env.outputs.build_environment }}
     steps:
-    - run: echo "env is ${CUR_ENV} - ${BUILD_ENVIRONMENT}"
-      env:
-        CUR_ENV: ${{ needs.prepare-env.outputs.build_environment }}
-    - run: if [ "testenv1" == "${KEY}" ] ; then echo "first env"; elif [ "testenv2" == "${KEY}" ] ; then echo "second env"; else echo "${KEY}" | base64; fi
-      shell: 'bash'
-      env:
-        KEY: ${{ secrets.KEY }}
-
-    - run: echo "first environment by endsWith"
-      if: ${{ endsWith(needs.prepare-env.outputs.build_environment, '1') }}
-
-    - run: echo "second environment by endsWith"
-      if: ${{ endsWith(needs.prepare-env.outputs.build_environment, '2') }}
+    - id: check
+      run: |
+        export MATCH_LENGTH=$(curl -sL  -H "Authorization: bearer ${TEST_TOKEN}" https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?event=schedule  | jq -r "[.workflow_runs[] | select(.head_sha == \"${CURRENT_SHA}\")] | length")
+        echo "::set-output name=match_length::${MATCH_LENGTH}"
+        echo "The match length is ${MATCH_LENGTH}"
