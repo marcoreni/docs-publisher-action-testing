@@ -33,6 +33,8 @@ jobs:
     steps:
     - id: check
       run: |
+        echo "${CURRENT_SHA}"
+        curl -sL  -H "Authorization: bearer ${AUTH_TOKEN}" https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?event=schedule  | jq -r "[.workflow_runs[]]"
         export MATCH_LENGTH=$(curl -sL  -H "Authorization: bearer ${AUTH_TOKEN}" https://api.github.com/repos/$GITHUB_REPOSITORY/actions/runs?event=schedule  | jq -r "[.workflow_runs[] | select(.head_sha == \"${CURRENT_SHA}\")] | length")
         echo "::set-output name=match_length::${MATCH_LENGTH}"
         echo "The match length is ${MATCH_LENGTH}"
