@@ -16,7 +16,7 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: lerna bootstrap
-    - uses: marcoreni/docs-publisher-action@v0.1.0-alpha.5
+    - uses: marcoreni/docs-publisher-action@v0.1.0-alpha.6
       with:
         deployment-branch: 'gh-pages'
         docs-command: 'lerna run --scope {packageName} docs'
