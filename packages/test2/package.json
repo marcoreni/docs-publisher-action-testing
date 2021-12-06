@@ -1,5 +1,5 @@
 {
-  "name": "test2",
+  "name": "@mds-bd/test2",
   "version": "0.0.0",
   "description": "> TODO: description",
   "author": "Marco Reni <reni.marco@gmail.com>",
@@ -19,9 +19,13 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "docs": "npx typedoc src/test2.ts"
+    "docs": "typedoc src/test2.ts"
   },
   "bugs": {
     "url": "https://github.com/marcoreni/docs-publisher-action-testing/issues"
+  },
+  "dependencies": {
+    "typedoc": "^0.22.10",
+    "typescript": "^4.5.2"
   }
 }
