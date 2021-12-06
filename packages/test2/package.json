@@ -1,0 +1,27 @@
+{
+  "name": "test2",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Marco Reni <reni.marco@gmail.com>",
+  "homepage": "https://github.com/marcoreni/docs-publisher-action-testing#readme",
+  "license": "ISC",
+  "main": "src/test2.js",
+  "directories": {
+    "lib": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoreni/docs-publisher-action-testing.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "docs": "npx typedoc src/test2.ts"
+  },
+  "bugs": {
+    "url": "https://github.com/marcoreni/docs-publisher-action-testing/issues"
+  }
+}

@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    concurrency: docs-publisher
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -13,8 +14,9 @@ jobs:
       with:
         node-version: '14'
     - run: npm install
-    - uses: marcoreni/docs-publisher-action@v0.0.13
+    - uses: marcoreni/docs-publisher-action@v0.1.0-alpha.0
       with:
         deployment-branch: 'gh-pages'
-        docs-command: 'npm run docs'
-        docs-path: 'docs'
+        docs-command: 'lerna exec --scope {packageName} docs'
+        docs-path: 'packages/{packageNameWithoutScope}/docs'
+        strategy: 'lerna'
