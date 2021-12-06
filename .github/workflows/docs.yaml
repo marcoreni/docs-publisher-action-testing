@@ -13,6 +13,7 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '14'
+        cache: 'npm'
     - run: npm install
     - uses: marcoreni/docs-publisher-action@v0.1.0-alpha.0
       with:
