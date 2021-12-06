@@ -1,5 +1,5 @@
 
-/** Hello, world! */
+/** Hello, !!world! */
 class Test1 {
 
 }
