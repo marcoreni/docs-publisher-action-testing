@@ -6,7 +6,9 @@ on:
 
 jobs:
   build:
-    concurrency: docs-publisher
+    concurrency: 
+      group: docs-publisher
+      cancel-in-progress: true
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -16,7 +18,7 @@ jobs:
         cache: 'npm'
     - run: npm install
     - run: lerna bootstrap
-    - uses: marcoreni/docs-publisher-action@v1.1.0-alpha0
+    - uses: marcoreni/docs-publisher-action@v1.1.0-alpha.1
       with:
         deployment-branch: 'gh-pages'
         docs-command: 'lerna run docs'
